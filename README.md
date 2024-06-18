@@ -9,7 +9,6 @@ Este é um projeto de estudos para explorar e implementar um aplicativo de entre
 - **Jetpack Compose**: Para construir uma UI moderna e declarativa.
 - **Kotlin**: A linguagem de programação usada no projeto.
 - **Room**: Para persistência de dados.
-- **Retrofit**: Para chamadas de API.
 - **Hilt Dagger**: Para injeção de dependência.
 
 ### Design
