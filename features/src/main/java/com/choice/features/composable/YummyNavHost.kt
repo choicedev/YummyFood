@@ -16,7 +16,7 @@ import androidx.navigation.compose.composable
 import com.choice.features.navigation.Destination
 
 @Composable
-fun YuumyNavHost(
+fun YummyNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController,
     startDestination: Destination = Destination.SplashScreen,
@@ -34,7 +34,7 @@ fun YuumyNavHost(
 
 }
 
-fun NavGraphBuilder.yuumyComposable(
+fun NavGraphBuilder.yummyComposable(
     destination: Destination,
     arguments: List<NamedNavArgument> = emptyList(),
     deepLinks: List<NavDeepLink> = emptyList(),

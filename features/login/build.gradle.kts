@@ -1,20 +1,16 @@
 plugins {
-    alias(libs.plugins.android.application)
+    id("com.android.library")
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
 }
 
 android {
-    namespace = "com.choice.yummyfood"
+    namespace = "com.choice.login"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.choice.yummyfood"
         minSdk = 27
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -55,9 +51,8 @@ dependencies {
 
     implementation(project(":design"))
     implementation(project(":features"))
-    implementation(project(":features:splash"))
 
-    
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -66,7 +61,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(project(":features:login"))
+    implementation(libs.lottie.airbnb)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

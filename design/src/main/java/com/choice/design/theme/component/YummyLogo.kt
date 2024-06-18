@@ -13,8 +13,8 @@ import com.choice.design.R
 import com.choice.design.theme.YummyTheme
 
 @Composable
-fun YummyLogo() {
-    Row {
+fun YummyLogo(modifier: Modifier = Modifier) {
+    Row(modifier = modifier){
         Text(
             text = "YUMMY",
             color = YummyTheme.colors.primary,

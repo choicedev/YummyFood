@@ -3,7 +3,7 @@ package com.choice.features.navigation.navigator
 import com.choice.features.navigation.NavigationIntent
 import kotlinx.coroutines.channels.Channel
 
-interface YuumyNavigator {
+interface YummyNavigator {
 
     val navigationChannel: Channel<NavigationIntent>
 

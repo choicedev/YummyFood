@@ -5,7 +5,7 @@ import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel
 import javax.inject.Inject
 
-class IAppNavigator @Inject constructor() : YuumyNavigator {
+class IYummyNavigator @Inject constructor() : YummyNavigator {
     override val navigationChannel = Channel<NavigationIntent>(
         capacity = Int.MAX_VALUE,
         onBufferOverflow = BufferOverflow.DROP_LATEST,

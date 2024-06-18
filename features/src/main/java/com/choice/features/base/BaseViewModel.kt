@@ -5,36 +5,37 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.choice.features.navigation.navigator.YuumyNavigator
+import com.choice.features.navigation.Destination
+import com.choice.features.navigation.navigator.YummyNavigator
 
 abstract class BaseViewModel<STATE, EVENT>(
     initState: STATE,
-    private val yuumyNavigator: YuumyNavigator
+    private val yummyNavigator: YummyNavigator
 ) : ViewModel() {
 
     var state by mutableStateOf(initState)
 
-    val navigate = yuumyNavigator.navigationChannel
+    val navigate = yummyNavigator.navigationChannel
 
     fun navigateBack(
         route: String? = null,
         inclusive: Boolean = true
     ) {
-        yuumyNavigator.tryNavigateBack(
+        yummyNavigator.tryNavigateBack(
             route,
             inclusive
         )
     }
 
     fun navigateTo(
-        route: String,
-        popUpToRoute: String? = null,
+        route: Destination,
+        popUpToRoute: Destination? = null,
         inclusive: Boolean = true,
         isSingleTop: Boolean = false
     ) {
-        yuumyNavigator.tryNavigateTo(
-            route,
-            popUpToRoute,
+        yummyNavigator.tryNavigateTo(
+            route.fullRoute,
+            popUpToRoute?.fullRoute,
             inclusive,
             isSingleTop
         )
