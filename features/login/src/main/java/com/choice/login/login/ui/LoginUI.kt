@@ -36,6 +36,7 @@ import com.choice.design.theme.YummyTheme
 import com.choice.design.component.YummyLogo
 import com.choice.design.composable.PrimaryButton
 import com.choice.features.composable.YummyScaffold
+import com.choice.features.navigation.Destination
 import com.choice.login.LoginViewModel
 import com.choice.login.R
 
@@ -65,14 +66,22 @@ fun LoginUI(navController: NavHostController) {
                 modifier = Modifier
                     .align(Alignment.Center)
                     .fillMaxSize()
-                    .padding(horizontal = YummyTheme.spacing.large)
+                    .padding(horizontal = YummyTheme.spacing.large),
+                onSignUpClick = {
+                    viewModel.navigateTo(
+                        route = Destination.SigninScreen
+                    )
+                }
             )
         }
     }
 }
 
 @Composable
-fun ButtonsLogin(modifier: Modifier = Modifier) {
+fun ButtonsLogin(
+    modifier: Modifier = Modifier,
+    onSignUpClick: () -> Unit
+) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
@@ -106,7 +115,7 @@ fun ButtonsLogin(modifier: Modifier = Modifier) {
         RegisterUserText(
             modifier = Modifier
                 .fillMaxWidth(),
-            onSignUpClick = {}
+            onSignUpClick = onSignUpClick
         )
 
     }

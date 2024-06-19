@@ -14,7 +14,7 @@ fun NavGraphBuilder.signInComposable(
     navController: NavHostController,
 ) {
     yummyComposable(
-        destination = Destination.LoginScreen,
+        destination = Destination.SigninScreen,
         popEnterTransition = {
             slideInHorizontally(
                 animationSpec = tween(1000),

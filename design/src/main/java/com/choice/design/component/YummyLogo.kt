@@ -18,14 +18,14 @@ fun YummyLogo(modifier: Modifier = Modifier) {
         Text(
             text = "YUMMY",
             color = YummyTheme.colors.primary,
-            style = YummyTheme.typography.displaySmall.copy(
+            style = YummyTheme.typography.headlineLarge.copy(
                 fontWeight = FontWeight.Bold
             )
         )
         Text(
             text = "F",
             color = YummyTheme.colors.onSecondaryContainer,
-            style = YummyTheme.typography.displaySmall.copy(
+            style = YummyTheme.typography.headlineLarge.copy(
                 fontWeight = FontWeight.Bold
             )
         )
@@ -40,7 +40,7 @@ fun YummyLogo(modifier: Modifier = Modifier) {
         Text(
             text = "D",
             color = YummyTheme.colors.onSecondaryContainer,
-            style = YummyTheme.typography.displaySmall.copy(
+            style = YummyTheme.typography.headlineLarge.copy(
                 fontWeight = FontWeight.Bold
             )
         )
