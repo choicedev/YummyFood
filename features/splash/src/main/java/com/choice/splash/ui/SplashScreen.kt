@@ -61,8 +61,7 @@ fun SplashUI(navHostController: NavHostController) {
     LaunchedEffect(Unit) {
         delay(4000)
         viewModel.navigateTo(
-            route = Destination.LoginScreen,
-            isSingleTop = true
+            route = Destination.LoginScreen
         )
     }
 

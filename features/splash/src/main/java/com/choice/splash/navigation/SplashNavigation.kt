@@ -16,7 +16,7 @@ fun NavGraphBuilder.splashComposable(
         destination = Destination.SplashScreen,
         exitTransition = { slideOutHorizontally(
             animationSpec = tween(1000),
-            targetOffsetX = { fullWidth -> -fullWidth } // Slide out to the left
+            targetOffsetX = { fullWidth -> -fullWidth }
         )+ fadeOut(tween(700))} ) {
         SplashUI(navController)
     }
