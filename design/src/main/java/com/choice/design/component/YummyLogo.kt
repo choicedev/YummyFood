@@ -1,4 +1,4 @@
-package com.choice.design.theme.component
+package com.choice.design.component
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.offset

@@ -42,7 +42,7 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.choice.design.theme.YummyTheme
-import com.choice.design.theme.component.YummyLogo
+import com.choice.design.component.YummyLogo
 import com.choice.features.composable.YummyScaffold
 import com.choice.features.navigation.Destination
 import com.choice.splash.R
