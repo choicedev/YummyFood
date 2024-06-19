@@ -1,48 +1,36 @@
-package com.choice.login.ui
+package com.choice.login.login.ui
 
-import android.text.Html
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.choice.design.theme.YummyTheme
 import com.choice.design.component.YummyLogo
@@ -52,7 +40,7 @@ import com.choice.login.LoginViewModel
 import com.choice.login.R
 
 @Composable
-fun LoginUI(navController: NavHostController){
+fun LoginUI(navController: NavHostController) {
 
     val viewModel = hiltViewModel<LoginViewModel>()
 
@@ -64,42 +52,43 @@ fun LoginUI(navController: NavHostController){
             modifier = Modifier
                 .padding(paddingValues)
                 .wrapContentSize()
-        ){
+        ) {
             FoodBackground()
 
             YummyLogo(
                 modifier = Modifier
                     .align(Alignment.TopCenter)
-                    .padding(top = YummyTheme.spacing.extraColossal)
+                    .padding(top = YummyTheme.spacing.extraColossal + 60.dp)
             )
 
-            ButtonLogin()
+            ButtonsLogin(
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .fillMaxSize()
+                    .padding(horizontal = YummyTheme.spacing.large)
+            )
         }
     }
 }
 
 @Composable
-fun BoxScope.ButtonLogin(modifier: Modifier = Modifier) {
+fun ButtonsLogin(modifier: Modifier = Modifier) {
     Column(
-        modifier = Modifier
-            .align(Alignment.Center)
-            .fillMaxSize()
-            .padding(
-                horizontal = YummyTheme.spacing.medium,
-
-                ),
+        modifier = modifier,
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        Spacer(
+            modifier = Modifier.padding(vertical = YummyTheme.spacing.extraHuge)
+        )
 
         PrimaryButton(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = YummyTheme.spacing.colossal),
             text = "Sign in",
-            onClick = {
-
-            }
+            onClick = { }
         )
 
         OrDivider()
@@ -108,19 +97,57 @@ fun BoxScope.ButtonLogin(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth(),
             text = "Continue with Google",
-            backgroundColor = Color(
-                red = 83,
-                green = 132,
-                blue = 238
-            ),
-            onClick = {  }
-        ){
+            backgroundColor = Color(red = 83, green = 132, blue = 238),
+            onClick = { }
+        ) {
             Image(painter = painterResource(id = R.drawable.icon_google), contentDescription = null)
         }
+
+        RegisterUserText(
+            modifier = Modifier
+                .fillMaxWidth(),
+            onSignUpClick = {}
+        )
 
     }
 }
 
+@Composable
+fun RegisterUserText(
+    modifier: Modifier = Modifier,
+    onSignUpClick: () -> Unit
+) {
+    Row(
+        modifier = modifier
+            .padding(top = YummyTheme.spacing.medium),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+
+        Text(
+            text = "Do not have an account?",
+            color = YummyTheme.colors.scrim,
+            style = TextStyle(
+                fontWeight = FontWeight.Bold
+            )
+        )
+
+        Spacer(modifier = Modifier.width(YummyTheme.spacing.extraExtraSmall))
+
+        TextButton(onClick = {
+            onSignUpClick()
+        }) {
+            Text(
+                text = "Sign up",
+                color = YummyTheme.colors.primary,
+                style = TextStyle(
+                    fontWeight = FontWeight.Bold
+                )
+            )
+        }
+
+    }
+}
 
 @Composable
 fun OrDivider(modifier: Modifier = Modifier) {

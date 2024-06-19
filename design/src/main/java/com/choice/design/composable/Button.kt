@@ -64,7 +64,7 @@ fun PrimaryButton(
         ){
             if(icon != null){
                 Box(
-                    modifier = Modifier.padding(horizontal = YummyTheme.spacing.large)
+                    modifier = Modifier.padding(horizontal = YummyTheme.spacing.mediumLarge)
                 ){
                     icon()
                 }

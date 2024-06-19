@@ -7,6 +7,7 @@ sealed class Destination(
 
     data object SplashScreen : NoArgumentsDestination("splash")
     data object LoginScreen : NoArgumentsDestination("login")
+    data object SigninScreen : NoArgumentsDestination("sign_in")
 
     val fullRoute: String = if (params.isEmpty()) route
     else StringBuilder(route).let { builder ->
