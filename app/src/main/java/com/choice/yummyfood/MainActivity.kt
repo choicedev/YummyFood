@@ -1,5 +1,6 @@
 package com.choice.yummyfood
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
@@ -17,12 +18,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         systemSettings()
-
+        applicationUI()
 
     }
 
-    @Composable
-    fun ApplicationUI(modifier: Modifier = Modifier) {
+    private fun applicationUI() {
         setContent {
             YummyTheme {
                 YummyUI()
@@ -33,8 +33,8 @@ class MainActivity : ComponentActivity() {
     private fun systemSettings() {
         enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.light(
-                android.graphics.Color.TRANSPARENT,
-                android.graphics.Color.TRANSPARENT
+                Color.TRANSPARENT,
+                Color.TRANSPARENT
             ),
         )
     }
