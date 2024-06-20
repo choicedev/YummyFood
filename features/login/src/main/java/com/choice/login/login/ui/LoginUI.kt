@@ -69,7 +69,7 @@ fun LoginUI(navController: NavHostController) {
                     .padding(horizontal = YummyTheme.spacing.large),
                 onSignUpClick = {
                     viewModel.navigateTo(
-                        route = Destination.SigninScreen
+                        route = Destination.SignUpScreen
                     )
                 }
             )
