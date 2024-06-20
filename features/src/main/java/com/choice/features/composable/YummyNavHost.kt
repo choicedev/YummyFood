@@ -4,6 +4,11 @@ import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NamedNavArgument
@@ -38,12 +43,32 @@ fun NavGraphBuilder.yummyComposable(
     destination: Destination,
     arguments: List<NamedNavArgument> = emptyList(),
     deepLinks: List<NavDeepLink> = emptyList(),
-    enterTransition: (AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition?)? = null,
-    exitTransition: (AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition?)? = null,
+    enterTransition: (AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition?)? = {
+        slideInHorizontally(
+            animationSpec = tween(800),
+            initialOffsetX = { fullWidth -> fullWidth }
+        ) + fadeIn(tween(1000))
+    },
+    exitTransition: (AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition?)? = {
+        slideOutHorizontally(
+            animationSpec = tween(800),
+            targetOffsetX = { fullWidth -> -fullWidth }
+        ) + fadeOut(tween(1000))
+    },
     popEnterTransition: (AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition?
-    )? = enterTransition,
+    )? = {
+        slideInHorizontally(
+            animationSpec = tween(800),
+            initialOffsetX = { fullWidth -> -fullWidth }
+        ) + fadeIn(tween(1000))
+    },
     popExitTransition: (AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition?
-    )? = exitTransition,
+    )? = {
+        slideOutHorizontally(
+            animationSpec = tween(800),
+            targetOffsetX = { fullWidth -> fullWidth }
+        ) + fadeOut(tween(1000))
+    },
     content: @Composable AnimatedVisibilityScope.(NavBackStackEntry) -> Unit
 ) {
 

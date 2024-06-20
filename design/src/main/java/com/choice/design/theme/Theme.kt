@@ -231,7 +231,7 @@ fun YummyTheme(
 
   MaterialTheme(
     colorScheme = colorScheme,
-    typography = typography,
+    typography = AppTypography,
     content = content
   )
 }

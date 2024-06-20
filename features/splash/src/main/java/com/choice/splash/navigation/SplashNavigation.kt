@@ -13,11 +13,8 @@ fun NavGraphBuilder.splashComposable(
     navController: NavHostController,
 ) {
     yummyComposable(
-        destination = Destination.SplashScreen,
-        exitTransition = { slideOutHorizontally(
-            animationSpec = tween(1000),
-            targetOffsetX = { fullWidth -> -fullWidth }
-        )+ fadeOut(tween(700))} ) {
+        destination = Destination.SplashScreen
+    ) {
         SplashUI(navController)
     }
 }

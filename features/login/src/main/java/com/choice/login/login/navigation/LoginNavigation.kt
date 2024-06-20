@@ -13,13 +13,8 @@ fun NavGraphBuilder.loginComposable(
     navController: NavHostController,
 ) {
     yummyComposable(
-        destination = Destination.LoginScreen,
-        popEnterTransition = {
-            slideInHorizontally(
-                animationSpec = tween(1000),
-                initialOffsetX = { fullWidth -> fullWidth } // Slide in from the right
-            )+ fadeIn(tween(700))
-        }) {
+        destination = Destination.LoginScreen
+    ) {
         LoginUI(navController)
     }
 }
