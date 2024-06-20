@@ -8,7 +8,7 @@ import com.choice.login.sign_in.navigation.signUpComposable
 import com.choice.splash.navigation.splashComposable
 
 @Composable
-fun YummyNavController() {
+fun YummyUI() {
 
     val navController = rememberNavController()
 
