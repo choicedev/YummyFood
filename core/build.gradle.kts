@@ -1,12 +1,11 @@
 plugins {
     id("com.android.library")
-    alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.jetbrains.kotlin.android)
 }
 
 android {
-    namespace = "com.choice.login"
+    namespace = "com.choice.core"
     compileSdk = 34
 
     defaultConfig {
@@ -49,10 +48,6 @@ android {
 
 dependencies {
 
-    implementation(project(":design"))
-    implementation(project(":features"))
-
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -61,8 +56,6 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(libs.lottie.airbnb)
-    implementation(project(":core"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -1,10 +1,10 @@
-package com.choice.login.sign_in.navigation
+package com.choice.login.sign_up.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import com.choice.features.composable.yummyComposable
 import com.choice.features.navigation.Destination
-import com.choice.login.sign_in.ui.SignUp
+import com.choice.login.sign_up.ui.SignUp
 
 fun NavGraphBuilder.signUpComposable(
     navController: NavHostController,

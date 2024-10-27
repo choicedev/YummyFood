@@ -1,5 +1,6 @@
 package com.choice.login.login.ui
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -26,6 +27,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -82,6 +84,9 @@ fun ButtonsLogin(
     modifier: Modifier = Modifier,
     onSignUpClick: () -> Unit
 ) {
+
+    val context = LocalContext.current
+
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
@@ -96,7 +101,7 @@ fun ButtonsLogin(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = YummyTheme.spacing.colossal),
-            text = "Sign in",
+            text = context.getString(R.string.label_sign_in),
             onClick = { }
         )
 
@@ -105,7 +110,7 @@ fun ButtonsLogin(
         PrimaryButton(
             modifier = Modifier
                 .fillMaxWidth(),
-            text = "Continue with Google",
+            text = context.getString(R.string.label_continue_with_google),
             backgroundColor = Color(red = 83, green = 132, blue = 238),
             onClick = { }
         ) {
@@ -126,6 +131,9 @@ fun RegisterUserText(
     modifier: Modifier = Modifier,
     onSignUpClick: () -> Unit
 ) {
+
+    val context = LocalContext.current
+
     Row(
         modifier = modifier
             .padding(top = YummyTheme.spacing.medium),
@@ -134,7 +142,7 @@ fun RegisterUserText(
     ) {
 
         Text(
-            text = "Do not have an account?",
+            text = context.getString(R.string.label_register_question),
             color = YummyTheme.colors.scrim,
             style = TextStyle(
                 fontWeight = FontWeight.Bold
@@ -147,7 +155,7 @@ fun RegisterUserText(
             onSignUpClick()
         }) {
             Text(
-                text = "Sign up",
+                text = context.getString(R.string.label_sign_up),
                 color = YummyTheme.colors.primary,
                 style = TextStyle(
                     fontWeight = FontWeight.Bold
@@ -160,6 +168,9 @@ fun RegisterUserText(
 
 @Composable
 fun OrDivider(modifier: Modifier = Modifier) {
+
+    val context = LocalContext.current
+
     Spacer(modifier = Modifier.height(YummyTheme.spacing.medium))
 
     Box(
@@ -173,7 +184,7 @@ fun OrDivider(modifier: Modifier = Modifier) {
         )
 
         Text(
-            text = "or",
+            text = context.getString(R.string.or_divider),
             color = YummyTheme.colors.outline,
             modifier = Modifier
                 .background(

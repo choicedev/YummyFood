@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">login</string>
+    <string name="label_sign_in">Logar</string>
+    <string name="label_continue_with_google">Continuar com Google</string>
+    <string name="label_register_question">Você não possuí uma conta?</string>
+    <string name="label_sign_up">Registre-se</string>
+    <string name="or_divider">ou</string>
+    <string name="label_full_name">Nome completo</string>
+    <string name="label_full_name_hint">Digite seu nome</string>
+    <string name="label_phone_number">Número de telefone</string>
+    <string name="label_sign_up_register">Cadastro</string>
+    <string name="label_phone_number_hint">Digite seu número</string>
+    <string name="label_password">Senha</string>
+    <string name="label_password_hint">Digite sua senha</string>
+</resources>
