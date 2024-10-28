@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">design</string>
+    <string name="password_requirement_weak">Senha fraca.\nInclua letras maiúsculas, minúsculas, números e caracteres especiais.</string>
+    <string name="password_requirement_medium">Senha média.\nConsidere adicionar mais complexidade.</string>
+    <string name="password_requirement_strong">Senha forte.</string>
+</resources>

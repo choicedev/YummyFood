@@ -1,6 +1,5 @@
 package com.choice.login.login.ui
 
-import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -21,6 +20,10 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -39,13 +42,17 @@ import com.choice.design.component.YummyLogo
 import com.choice.design.composable.PrimaryButton
 import com.choice.features.composable.YummyScaffold
 import com.choice.features.navigation.Destination
-import com.choice.login.LoginViewModel
+import com.choice.login.SignUpViewModel
 import com.choice.login.R
 
 @Composable
 fun LoginUI(navController: NavHostController) {
 
-    val viewModel = hiltViewModel<LoginViewModel>()
+    val viewModel = hiltViewModel<SignUpViewModel>()
+    var isEnabled by remember {
+        mutableStateOf(true)
+    }
+
 
     YummyScaffold(
         navController = navController,
@@ -70,9 +77,12 @@ fun LoginUI(navController: NavHostController) {
                     .fillMaxSize()
                     .padding(horizontal = YummyTheme.spacing.large),
                 onSignUpClick = {
-                    viewModel.navigateTo(
-                        route = Destination.SignUpScreen
-                    )
+                    if(isEnabled) {
+                        isEnabled = false
+                        viewModel.navigateTo(
+                            route = Destination.SignUpScreen
+                        )
+                    }
                 }
             )
         }
@@ -194,6 +204,7 @@ fun OrDivider(modifier: Modifier = Modifier) {
                 .padding(YummyTheme.spacing.mediumSmall)
         )
     }
+    Spacer(modifier = Modifier.height(YummyTheme.spacing.medium))
 }
 
 @Composable

@@ -13,4 +13,6 @@
     <string name="label_phone_number_hint">Digite seu número</string>
     <string name="label_password">Senha</string>
     <string name="label_password_hint">Digite sua senha</string>
+    <string name="error_empty_name">Nome não pode ser vazio</string>
+
 </resources>

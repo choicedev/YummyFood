@@ -1,6 +1,6 @@
 package com.choice.design.utils
 
-import com.choice.core.di.model.Country
+import com.choice.core.domain.model.Country
 
 class PhoneNumberFormatter {
 
@@ -24,9 +24,11 @@ class PhoneNumberFormatter {
         }
     }
 
-    fun getRawPhoneNumber(phoneNumber: String, country: Country): String {
-        val ddd = country.ddd
-        val rawNumber = phoneNumber.replace("[^0-9]".toRegex(), "")
-        return "$ddd$rawNumber"
+    companion object {
+        fun getRawPhoneNumber(phoneNumber: String, country: Country, withDDD: Boolean = true): String {
+            val ddd = country.ddd
+            val rawNumber = phoneNumber.replace("[^0-9]".toRegex(), "")
+            return if(withDDD) "$ddd$rawNumber" else rawNumber
+        }
     }
 }

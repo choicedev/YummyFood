@@ -7,13 +7,16 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.choice.features.navigation.Destination
 import com.choice.features.navigation.navigator.YummyNavigator
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 abstract class BaseViewModel<STATE, EVENT>(
     initState: STATE,
     private val yummyNavigator: YummyNavigator
 ) : ViewModel() {
 
-    var state by mutableStateOf(initState)
+    protected val _state = MutableStateFlow(initState)
+    val state = _state.asStateFlow()
 
     val navigate = yummyNavigator.navigationChannel
 

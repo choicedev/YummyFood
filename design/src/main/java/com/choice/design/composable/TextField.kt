@@ -1,6 +1,7 @@
 package com.choice.design.composable
 
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -24,11 +25,9 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -39,14 +38,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import com.choice.core.di.model.Country
+import com.choice.core.domain.model.Country
+import com.choice.design.domain.model.PasswordRequirements
+import com.choice.design.domain.model.validatePassword
 import com.choice.design.theme.YummyTheme
 import com.choice.design.utils.PhoneNumberVisualTransformation
 
@@ -136,7 +137,8 @@ fun YummyTextField(
     trailingIcon: @Composable (() -> Unit)? = null,
     prefix: @Composable (() -> Unit)? = null,
     suffix: @Composable (() -> Unit)? = null,
-    supportingText: @Composable (() -> Unit)? = null,
+    supportingText: String? = null,
+    supportingTextColor: Color = YummyTheme.colors.onSurface,
     isError: Boolean = false,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
@@ -146,10 +148,9 @@ fun YummyTextField(
     minLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
+
     Column(
-        modifier = Modifier
-            .animateContentSize(tween(700))
-            .padding(YummyTheme.spacing.extraExtraSmall)
+        modifier = Modifier.animateContentSize(tween(700))
     ) {
         title?.let {
             Text(
@@ -157,7 +158,7 @@ fun YummyTextField(
                     bottom = YummyTheme.spacing.small
                 ),
                 text = it,
-                fontWeight = FontWeight.Bold,
+                fontWeight = FontWeight.W500,
                 color = YummyTheme.colors.onSurface
             )
         }
@@ -165,13 +166,10 @@ fun YummyTextField(
         OutlinedTextField(
             value = value,
             onValueChange = onValueChange,
-            modifier = modifier.padding(
-                vertical = 1.dp
-            ),
+            modifier = modifier,
             enabled = enabled,
             readOnly = readOnly,
             textStyle = YummyTheme.typography.bodyMedium.copy(
-                fontWeight = FontWeight.Bold,
                 color = YummyTheme.colors.onSurface
             ),
             label = label,
@@ -181,7 +179,7 @@ fun YummyTextField(
                         text = it,
                         color = YummyTheme.colors.outline,
                         style = YummyTheme.typography.bodyMedium.copy(
-                            fontWeight = FontWeight.Bold,
+                            fontWeight = FontWeight.W500,
                             color = YummyTheme.colors.onSurface
                         )
                     )
@@ -191,7 +189,17 @@ fun YummyTextField(
             trailingIcon = trailingIcon,
             prefix = prefix,
             suffix = suffix,
-            supportingText = supportingText,
+            supportingText = {
+                supportingText?.let {
+                    Text(
+                        text = it,
+                        color = supportingTextColor,
+                        style = YummyTheme.typography.bodyMedium.copy(
+                            fontWeight = FontWeight.W400
+                        )
+                    )
+                }
+            },
             isError = isError,
             visualTransformation = visualTransformation,
             keyboardOptions = keyboardOptions,
@@ -215,13 +223,14 @@ fun PhoneNumberFormatter(
     title: String,
     placeholder: String?,
     value: String,
+    onCountryValue: ((Country) -> Unit)? = null,
     onValueChange: (String) -> Unit
 ) {
     var selectedCountry by remember { mutableStateOf(Country.BRAZIL) }
     var expanded by remember { mutableStateOf(false) }
 
     Column(
-        modifier = modifier
+        modifier = modifier.padding(bottom = YummyTheme.spacing.medium),
     ) {
 
         YummyTextField(
@@ -232,6 +241,9 @@ fun PhoneNumberFormatter(
             title = title,
             visualTransformation = PhoneNumberVisualTransformation(selectedCountry),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+            keyboardActions = KeyboardActions {
+                this.defaultKeyboardAction(ImeAction.Next)
+            },
             prefix = {
                 Row(
                     modifier = Modifier
@@ -240,11 +252,11 @@ fun PhoneNumberFormatter(
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,
 
-                    ){
+                    ) {
                     Box(
                         modifier = Modifier
                             .padding(horizontal = 1.dp)
-                    ){
+                    ) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
@@ -263,7 +275,7 @@ fun PhoneNumberFormatter(
                             onDismissRequest = { expanded = false }
                         ) {
                             Country.entries.forEach { country ->
-                                Row (
+                                Row(
                                     modifier = Modifier
                                         .wrapContentWidth()
                                         .clip(shape = RoundedCornerShape(YummyTheme.spacing.mediumSmall))
@@ -272,10 +284,11 @@ fun PhoneNumberFormatter(
                                             selectedCountry = country
                                             expanded = false
                                             onValueChange("")
+                                            onCountryValue?.invoke(country)
                                         },
                                     horizontalArrangement = Arrangement.Center,
                                     verticalAlignment = Alignment.CenterVertically
-                                ){
+                                ) {
                                     Image(
                                         modifier = Modifier
                                             .size(YummyTheme.spacing.extraLarge),
@@ -300,5 +313,45 @@ fun PhoneNumberFormatter(
                 }
             }
         )
+    }
+}
+
+@Composable
+fun PasswordStrengthIndicator(
+    modifier: Modifier = Modifier,
+    password: String
+) {
+    val strength = validatePassword(password)
+    val progress = when (strength) {
+        null -> 0.0
+        PasswordRequirements.WEAK -> 33.0
+        PasswordRequirements.MEDIUM -> 66.0
+        PasswordRequirements.STRONG -> 100.0
+    }
+
+    val animatedProgress by animateFloatAsState(
+        targetValue = progress.toFloat(),
+        animationSpec = tween(durationMillis = 300),
+        label = ""
+    )
+
+    Column(
+        modifier = modifier
+            .animateContentSize()
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.Start
+    ) {
+        AnimatedProgressBar(
+            progress = animatedProgress / 100f,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        if (strength != null) {
+            Text(
+                modifier = Modifier.padding(top = YummyTheme.spacing.small),
+                text = stringResource(id = strength.label),
+                style = YummyTheme.typography.bodySmall
+            )
+        }
     }
 }

@@ -4,7 +4,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
-import com.choice.core.di.model.Country
+import com.choice.core.domain.model.Country
 
 class PhoneNumberVisualTransformation(private val country: Country) : VisualTransformation {
 
